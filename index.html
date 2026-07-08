@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaveri K. Sheth — Computational Linguistics &amp; Child Language</title>
+<meta name="description" content="Kaveri K. Sheth — computational linguist and developmental language researcher. Postdoctoral researcher at LSCP (ENS, EHESS, CNRS, PSL University), Paris.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FCFCFA;
+    --ink:#14161A;
+    --muted:#5C6470;
+    --accent:#2447D6;
+    --accent-soft:#EEF1FE;
+    --line:#E6E8EC;
+    --maxw:760px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Newsreader',Georgia,serif;
+    font-size:18px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline;text-underline-offset:3px}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+  /* ---------- Nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:10;
+    background:rgba(252,252,250,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+    display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  }
+  .nav-name{font-family:'Sora',sans-serif;font-weight:600;font-size:.95rem;color:var(--ink);letter-spacing:-.01em}
+  .nav-name:hover{text-decoration:none;color:var(--accent)}
+  .nav-links{display:flex;gap:20px;flex-wrap:wrap}
+  .nav-links a{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);
+    text-transform:lowercase;letter-spacing:.02em;
+  }
+  .nav-links a:hover{color:var(--accent);text-decoration:none}
+
+  main{max-width:var(--maxw);margin:0 auto;padding:0 24px 96px}
+
+  /* ---------- Hero ---------- */
+  header.hero{padding:84px 0 56px}
+  .hero h1{
+    font-family:'Sora',sans-serif;font-weight:700;letter-spacing:-.03em;
+    font-size:clamp(2.4rem,6vw,3.4rem);line-height:1.08;
+  }
+  .ipa{
+    font-family:'IBM Plex Mono',monospace;font-size:.95rem;color:var(--muted);
+    margin-top:10px;letter-spacing:.03em;
+  }
+  .hero .role{
+    margin-top:22px;font-size:1.18rem;max-width:36em;color:var(--ink);
+  }
+  .hero .role em{color:var(--muted)}
+  .hero-actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{
+    font-family:'Sora',sans-serif;font-size:.88rem;font-weight:600;
+    padding:11px 20px;border-radius:6px;display:inline-block;
+  }
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn-primary:hover{background:var(--accent);text-decoration:none}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+  /* ---------- Waveform signature ---------- */
+  .wave{display:block;width:100%;height:54px;margin:8px 0 0;overflow:visible}
+  .wave path{
+    fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;
+    stroke-dasharray:1600;stroke-dashoffset:1600;
+    animation:draw 2.2s cubic-bezier(.4,0,.2,1) .3s forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .fade-up{opacity:0;transform:translateY(10px);animation:rise .7s ease forwards}
+  .fade-up.d1{animation-delay:.05s}.fade-up.d2{animation-delay:.15s}.fade-up.d3{animation-delay:.25s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .wave path{animation:none;stroke-dashoffset:0}
+    .fade-up{animation:none;opacity:1;transform:none}
+    html{scroll-behavior:auto}
+  }
+
+  /* ---------- Sections ---------- */
+  section{padding:56px 0 8px}
+  .section-head{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .section-head h2{
+    font-family:'Sora',sans-serif;font-weight:600;font-size:1.05rem;
+    letter-spacing:-.01em;white-space:nowrap;
+  }
+  .tick{flex:1;height:14px;opacity:.9}
+  .tick line{stroke:var(--line);stroke-width:1.4}
+  .tick line.hi{stroke:var(--accent)}
+
+  /* ---------- About ---------- */
+  .about p{max-width:38em;margin-bottom:16px}
+  .interests{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+  .interests span{
+    font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--accent);
+    background:var(--accent-soft);padding:5px 11px;border-radius:99px;
+  }
+
+  /* ---------- Publications ---------- */
+  .pub{
+    padding:20px 0;border-bottom:1px solid var(--line);
+    display:grid;grid-template-columns:64px 1fr;gap:18px;
+  }
+  .pub:last-child{border-bottom:none}
+  .pub-year{
+    font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--muted);padding-top:4px;
+  }
+  .pub-title{
+    font-family:'Sora',sans-serif;font-weight:500;font-size:1.02rem;
+    letter-spacing:-.01em;line-height:1.4;
+  }
+  .pub-authors{font-size:.95rem;color:var(--muted);margin-top:5px}
+  .pub-authors b{color:var(--ink);font-weight:500}
+  .pub-meta{margin-top:8px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .venue{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--accent);
+    border:1px solid var(--accent);border-radius:4px;padding:2px 8px;
+  }
+  .venue.soft{color:var(--muted);border-color:var(--line)}
+  .pub-links{font-family:'IBM Plex Mono',monospace;font-size:.76rem}
+  .pub-links a{margin-right:12px}
+
+  /* ---------- Projects ---------- */
+  .projects{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{
+    border:1px solid var(--line);border-radius:8px;padding:22px;
+    transition:border-color .2s ease;
+  }
+  .card:hover{border-color:var(--accent)}
+  .card h3{font-family:'Sora',sans-serif;font-weight:600;font-size:.98rem;letter-spacing:-.01em}
+  .card p{font-size:.95rem;color:var(--muted);margin-top:8px}
+  .card .stack{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--accent);
+    margin-top:14px;display:block;
+  }
+
+  /* ---------- Talks, teaching, honors ---------- */
+  .list-row{
+    display:grid;grid-template-columns:64px 1fr;gap:18px;
+    padding:14px 0;border-bottom:1px solid var(--line);
+  }
+  .list-row:last-child{border-bottom:none}
+  .list-row .when{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--muted);padding-top:2px}
+  .list-row .what{font-size:1rem}
+  .list-row .where{color:var(--muted);font-size:.92rem}
+
+  /* ---------- Contact / footer ---------- */
+  .contact p{max-width:38em}
+  .contact-links{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 26px}
+  .contact-links a{font-family:'IBM Plex Mono',monospace;font-size:.82rem}
+  footer{
+    border-top:1px solid var(--line);margin-top:72px;padding:26px 0 0;
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--muted);
+  }
+
+  @media (max-width:600px){
+    .projects{grid-template-columns:1fr}
+    .pub,.list-row{grid-template-columns:1fr;gap:4px}
+    header.hero{padding:60px 0 44px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="#top">Kaveri K. Sheth</a>
+    <div class="nav-links">
+      <a href="#about">about</a>
+      <a href="#publications">publications</a>
+      <a href="#projects">projects</a>
+      <a href="#talks">talks</a>
+      <a href="#teaching">teaching</a>
+      <a href="#writing">writing</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+
+  <header class="hero">
+    <h1 class="fade-up">Kaveri K. Sheth</h1>
+    <!-- Verify this IPA transcription of your name — you're the linguist! -->
+    <p class="ipa fade-up d1">/ˈkɑːvəɾi ʃɛθ/ · Paris, France</p>
+
+    <!-- Animated speech waveform -->
+    <svg class="wave" viewBox="0 0 760 54" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,27 L30,27 Q36,27 38,22 T46,27 Q52,27 55,14 T62,27 Q66,27 68,24 T74,27 L96,27 Q102,27 105,8 T112,27 Q118,27 121,42 T128,27 Q134,27 137,4 T144,27 Q150,27 153,48 T160,27 Q166,27 169,12 T176,27 L210,27 Q216,27 218,23 T226,27 Q232,27 235,10 T242,27 Q248,27 251,40 T258,27 L300,27 Q306,27 309,16 T316,27 Q322,27 325,46 T332,27 Q338,27 341,6 T348,27 Q354,27 357,38 T364,27 Q370,27 372,24 T378,27 L430,27 Q436,27 439,13 T446,27 Q452,27 455,44 T462,27 Q468,27 471,9 T478,27 L520,27 Q526,27 528,23 T536,27 Q542,27 545,15 T552,27 Q558,27 561,36 T568,27 Q574,27 577,19 T584,27 L640,27 Q646,27 649,17 T656,27 Q662,27 665,39 T672,27 Q678,27 680,24 T686,27 L760,27"/>
+    </svg>
+
+    <p class="role fade-up d2">
+      Computational linguist &amp; developmental language researcher. I study how infants
+      learn language from the sparse, noisy, multimodal input of everyday life — and build
+      the speech pipelines, benchmarks, and open infrastructure that make that science possible.
+      <em>Postdoctoral researcher at LSCP — ENS, EHESS, CNRS, PSL University, Paris.</em>
+    </p>
+
+    <div class="hero-actions fade-up d3">
+      <a class="btn btn-primary" href="Sheth_CV.pdf">Download CV</a>
+      <a class="btn btn-ghost" href="#publications">Publications</a>
+    </div>
+  </header>
+
+  <section id="about" class="about">
+    <div class="section-head">
+      <h2>About</h2>
+      <svg class="tick" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="7" x2="600" y2="7"/><line class="hi" x1="0" y1="2" x2="0" y2="12" transform="translate(8,0)"/></svg>
+    </div>
+    <p>
+      My work sits at the intersection of AI and the science of child language learning.
+      I use automatic speech recognition and data science to characterize the ecological
+      input children actually learn from — building speech-processing pipelines and machine
+      learning benchmarks from long-form, naturalistic audio recordings across typologically
+      diverse languages, and validating them cross-linguistically.
+    </p>
+    <p>
+      I hold a PhD in Linguistics and an MS in Computational Linguistics from the University
+      of Washington, where I was advised by Naja Ferjan Ramírez, Patricia Kuhl, and Gina-Anne
+      Levow. I publish in both machine learning venues (Interspeech) and cognitive science
+      journals, and I lead <b>ELSI</b>, a nonprofit sustaining open, multimodal research
+      infrastructure for the language development community.
+    </p>
+    <p>
+      Beyond the research itself, I care deeply about how academia trains its people.
+      I've mentored 15+ students, and I'm currently writing a book on mentorship in
+      academia — what it actually means to be a good mentor, and how we could do it
+      better. I write about this and more on <a href="#">my Substack</a>.
+    </p>
+    <div class="interests">
+      <span>child language acquisition</span>
+      <span>long-form recordings</span>
+      <span>speech technology</span>
+      <span>child-directed speech</span>
+      <span>cross-linguistic methods</span>
+      <span>open science</span>
+      <span>mentorship</span>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="section-head">
+      <h2>Publications</h2>
+      <svg class="tick" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="7" x2="600" y2="7"/><line class="hi" x1="0" y1="2" x2="0" y2="12" transform="translate(8,0)"/></svg>
+    </div>
+
+    <div class="pub">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">Context-aware child-directed speech detection from long-form recordings</div>
+        <div class="pub-authors">Charlot, T., Kunze, T., <b>Sheth, K.K.</b> &amp; Cristia, A.</div>
+        <div class="pub-meta">
+          <span class="venue">Interspeech 2026</span>
+          <span class="pub-links"><a href="#">pdf</a><a href="#">code</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">Deriving benchmarking from long-form recordings: Challenges and opportunities</div>
+        <div class="pub-authors"><b>Sheth, K.K.</b>, Borst, L., Kunze, T., Levachin, M., Rassenen, O., Tsuji, S., &amp; Cristia, A.</div>
+        <div class="pub-meta">
+          <span class="venue">Interspeech 2026</span>
+          <span class="pub-links"><a href="#">pdf</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">From academic tool to community infrastructure: A call for Indigenous partnership in speech data governance</div>
+        <div class="pub-authors"><b>Sheth, K.K.</b> &amp; Christian, S.</div>
+        <div class="pub-meta">
+          <span class="venue">Interspeech 2026</span>
+          <span class="pub-links"><a href="#">pdf</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-year">—</div>
+      <div>
+        <div class="pub-title">A rule-based approach for identifying child-directed and overheard speech in long-form recordings: Validation across typologically diverse datasets</div>
+        <div class="pub-authors"><b>Sheth, K.K.</b>, Tey, K., Borst, L., Bergelson, E., Casillas, M., Rowland, C., Soderstrom, M., et al.</div>
+        <div class="pub-meta">
+          <span class="venue soft">In preparation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-year">2025</div>
+      <div>
+        <div class="pub-title">A longitudinal corpus analysis of the quantity, syntactic and lexical characteristics of maternal and paternal parentese</div>
+        <div class="pub-authors"><b>Sheth, K.K.</b> &amp; Ferjan Ramírez, N.</div>
+        <div class="pub-meta">
+          <span class="venue">Language Learning &amp; Development</span>
+          <span class="pub-links"><a href="#">pdf</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-title">Parentese in infancy predicts 5-year language complexity and conversational turns</div>
+        <div class="pub-authors">Ferjan Ramírez, N., Weiss, Y., <b>Sheth, K.K.</b>, &amp; Kuhl, P.K.</div>
+        <div class="pub-meta">
+          <span class="venue">Journal of Child Language</span>
+          <span class="pub-links"><a href="#">pdf</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-title">Second language learning in infant education centers in Madrid: Effects of age, dosage, and socioeconomic status</div>
+        <div class="pub-authors">Ferjan Ramírez, N., Weiss, Y., <b>Sheth, K.K.</b>, &amp; Kuhl, P.K.</div>
+        <div class="pub-meta">
+          <span class="venue">Int. J. Environ. Res. Public Health</span>
+          <span class="pub-links"><a href="#">pdf</a></span>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:20px;font-size:.92rem;color:var(--muted)">
+      Full list on <a href="#">Google Scholar</a> →
+    </p>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <h2>Projects &amp; leadership</h2>
+      <svg class="tick" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="7" x2="600" y2="7"/><line class="hi" x1="0" y1="2" x2="0" y2="12" transform="translate(8,0)"/></svg>
+    </div>
+    <div class="projects">
+      <a class="card" href="#">
+        <h3>ELSI</h3>
+        <p>Nonprofit sustaining multimodal, open research infrastructure for the language development community. As CEO, I lead funding, hiring, and partnerships with research teams worldwide.</p>
+        <span class="stack">nonprofit · open science · ceo</span>
+      </a>
+      <a class="card" href="#">
+        <h3>Child-directed speech detection</h3>
+        <p>Rule-based system for separating child-directed from overheard speech in long-form recordings, validated across typologically diverse datasets with collaborators on four continents.</p>
+        <span class="stack">python · asr · cross-linguistic</span>
+      </a>
+      <a class="card" href="#">
+        <h3>Long-form benchmarking framework</h3>
+        <p>A framework for deriving machine learning benchmarks from naturalistic recordings — enabling principled comparison of how humans and machines learn from similar input.</p>
+        <span class="stack">benchmarks · interspeech 2026</span>
+      </a>
+      <a class="card" href="#">
+        <h3>Gendered citation tracking</h3>
+        <p>Python NLP pipeline tracking gendered citation patterns in news media at scale, built during a data science internship at ReThink Media.</p>
+        <span class="stack">spacy · neuralcoref · pandas</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="talks">
+    <div class="section-head">
+      <h2>Talks, posters &amp; service</h2>
+      <svg class="tick" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="7" x2="600" y2="7"/><line class="hi" x1="0" y1="2" x2="0" y2="12" transform="translate(8,0)"/></svg>
+    </div>
+
+    <div class="list-row">
+      <div class="when">2026</div>
+      <div>
+        <div class="what">CHILDSPACE — special session on child speech and language technology</div>
+        <div class="where">Co-organizer · Interspeech 2026</div>
+      </div>
+    </div>
+    <div class="list-row">
+      <div class="when">2026</div>
+      <div>
+        <div class="what">A rule-based approach for identifying child-directed and overheard speech in long-form recordings</div>
+        <div class="where">Talk · International Congress for Infant Studies (ICIS) · Panama City, Panama</div>
+      </div>
+    </div>
+    <div class="list-row">
+      <div class="when">2022</div>
+      <div>
+        <div class="what">Paternal and maternal parentese: A longitudinal corpus analysis</div>
+        <div class="where">Poster · International Congress for Infant Studies (ICIS) · Ottawa, Canada</div>
+      </div>
+    </div>
+    <div class="list-row">
+      <div class="when">2021</div>
+      <div>
+        <div class="what">Paternal and maternal parentese and infant vocabularies</div>
+        <div class="where">Talk · Boston University Conference on Language Development (BUCLD) · Poster · ICIS</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="teaching">
+    <div class="section-head">
+      <h2>Teaching &amp; mentorship</h2>
+      <svg class="tick" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="7" x2="600" y2="7"/><line class="hi" x1="0" y1="2" x2="0" y2="12" transform="translate(8,0)"/></svg>
+    </div>
+
+    <div class="list-row">
+      <div class="when">2020–22</div>
+      <div>
+        <div class="what">Teaching Assistant, University of Washington</div>
+        <div class="where">LING 200 Introduction to Linguistic Thought · LING 580 Naturalistic Audio Recordings of Child Language · LING 233 Language &amp; Society</div>
+      </div>
+    </div>
+    <div class="list-row">
+      <div class="when">2020–25</div>
+      <div>
+        <div class="what">Undergraduate research mentor</div>
+        <div class="where">Supervised 15+ research assistants and interns at the Language Development &amp; Processing Lab and the Institute for Learning &amp; Brain Sciences (I-LABS)</div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:44px">
+      <h2>Honors</h2>
+      <svg class="tick" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="7" x2="600" y2="7"/><line class="hi" x1="0" y1="2" x2="0" y2="12" transform="translate(8,0)"/></svg>
+    </div>
+    <div class="list-row">
+      <div class="when">2021</div>
+      <div><div class="what">Paula Menyuk Award</div><div class="where">Boston University Conference on Language Development</div></div>
+    </div>
+    <div class="list-row">
+      <div class="when">2020</div>
+      <div><div class="what">Top Scholar Award for the Recruitment of Outstanding Graduate Students</div><div class="where">University of Washington</div></div>
+    </div>
+    <div class="list-row">
+      <div class="when">2018</div>
+      <div><div class="what">Independent Research Grant</div><div class="where">Emory University</div></div>
+    </div>
+  </section>
+
+  <section id="writing">
+    <div class="section-head">
+      <h2>Writing</h2>
+      <svg class="tick" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="7" x2="600" y2="7"/><line class="hi" x1="0" y1="2" x2="0" y2="12" transform="translate(8,0)"/></svg>
+    </div>
+    <div class="projects">
+      <a class="card" href="#">
+        <h3>A book on mentorship in academia</h3>
+        <p>In progress. What it actually means to be a good mentor — and how academia, which runs on mentorship but rarely teaches it, could do better by the people it trains.</p>
+        <span class="stack">book · in progress</span>
+      </a>
+      <a class="card" href="#">
+        <h3>Substack</h3>
+        <p>Essays on mentorship, academia, language science, and life as a researcher. New posts land in your inbox — subscribe to follow along.</p>
+        <span class="stack">substack · essays</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="section-head">
+      <h2>Contact</h2>
+      <svg class="tick" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="7" x2="600" y2="7"/><line class="hi" x1="0" y1="2" x2="0" y2="12" transform="translate(8,0)"/></svg>
+    </div>
+    <p>
+      I'm currently exploring [faculty / research scientist / industry research] opportunities.
+      If you're hiring — or want to talk about child language, speech technology, or open
+      research infrastructure — my inbox is open.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:ksheth2019@gmail.com">ksheth2019@gmail.com</a>
+      <a href="#">google scholar</a>
+      <a href="#">github</a>
+      <a href="#">linkedin</a>
+      <a href="#">substack</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Kaveri K. Sheth</span>
+    <span>last updated jun 2026</span>
+  </footer>
+
+</main>
+</body>
+</html>
